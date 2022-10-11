@@ -8,13 +8,40 @@
 import SwiftUI
 
 struct ListView: View {
+	
+	@State var items: [String] = [
+		"첫번째 제목",
+		"두번째 제목",
+		"세번째!"
+	]
+	
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+		List {
+			ForEach(items, id: \.self) { item in
+				ListRowView(title: item)
+			}
+		}
+		.listStyle(.plain)
+		.navigationTitle("Todo List 📝")
+		.toolbar {
+			ToolbarItem(placement: .navigationBarLeading) {
+				EditButton()
+			}
+			ToolbarItem(placement: .navigationBarTrailing) {
+				NavigationLink("Add") {
+					AddView()
+				}
+			}
+		}
     }
 }
 
 struct ListView_Previews: PreviewProvider {
     static var previews: some View {
-        ListView()
+		NavigationStack {
+			ListView()
+		}
     }
 }
+
+
