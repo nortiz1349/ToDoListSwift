@@ -36,14 +36,18 @@ struct ListView: View {
 		.navigationTitle("Todo List 📝")
 		.toolbar {
 			ToolbarItem(placement: .navigationBarLeading) {
-				EditButton()
-					.font(.headline)
+				if !listViewModel.items.isEmpty {
+					EditButton()
+						.font(.headline)
+				}
 			}
 			ToolbarItem(placement: .navigationBarTrailing) {
-				NavigationLink("Add") {
-					AddView()
+				if !listViewModel.items.isEmpty {
+					NavigationLink("Add") {
+						AddView()
+					}
+					.font(.headline)
 				}
-				.font(.headline)
 			}
 		}
     }
